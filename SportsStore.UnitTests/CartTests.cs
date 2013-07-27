@@ -89,13 +89,13 @@ namespace SportsStore.UnitTests
             var p2 = new Product { ProductId = 2, Name = "P2", Price = 50M };
             // Arrange - create a new cart 
             Cart target = new Cart();
-            
+
             // Act 
             target.AddItem(p1, 1);
             target.AddItem(p2, 1);
             target.AddItem(p1, 3);
             decimal result = target.ComputeTotalValue();
-            
+
             // Assert 
             Assert.AreEqual(result, 450M);
         }
@@ -111,10 +111,10 @@ namespace SportsStore.UnitTests
             // Arrange - add some items 
             target.AddItem(p1, 1);
             target.AddItem(p2, 1);
-            
+
             // Act - reset the cart 
             target.Clear();
-            
+
             // Assert 
             Assert.AreEqual(target.Lines.Count(), 0);
         }
@@ -129,7 +129,7 @@ namespace SportsStore.UnitTests
                     }.AsQueryable());
 
             Cart cart = new Cart();
-            var target = new CartController(mock.Object);
+            var target = new CartController(mock.Object, null);
 
             target.AddToCart(cart, 1, null);
 
@@ -149,11 +149,11 @@ namespace SportsStore.UnitTests
             // Arrange - create a Cart 
             Cart cart = new Cart();
             // Arrange - create the controller 
-            var target = new CartController(mock.Object);
-            
+            var target = new CartController(mock.Object, null);
+
             // Act - add a product to the cart 
             RedirectToRouteResult result = target.AddToCart(cart, 2, "myUrl");
-            
+
             // Assert 
             Assert.AreEqual(result.RouteValues["action"], "Index");
             Assert.AreEqual(result.RouteValues["returnUrl"], "myUrl");
@@ -165,14 +165,14 @@ namespace SportsStore.UnitTests
             // Arrange - create a Cart 
             Cart cart = new Cart();
             // Arrange - create the controller 
-            CartController target = new CartController(null);
-            
+            CartController target = new CartController(null, null);
+
             // Act - call the Index action method 
             CartIndexViewModel result = (CartIndexViewModel)target.Index(cart, "myUrl").ViewData.Model;
-            
+
             // Assert 
             Assert.AreSame(result.Cart, cart);
             Assert.AreEqual(result.ReturnUrl, "myUrl");
-        } 
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace SportsStore.WebUI.Infrastructure
 
             _ninjectKernel.Bind<IOrderProcessor>()
                           .To<EmailOrderProcessor>()
-                          .WithConstructorArgument("settings", EmailSettings);
+                          .WithConstructorArgument("settings", emailSettings);
         }
     }
 }
