@@ -24,10 +24,11 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.ActionLink(item.Name, "Edit", new { item.ProductId })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
@@ -42,7 +43,7 @@
                 @using (Html.BeginForm("Delete", "Admin"))
                 {
                     @Html.Hidden("ProductId", item.ProductId)
-                    <input type="submit" value="Delete"/>
+                    <input type="submit" value="Delete" />
                 }
             </td>
         </tr>
